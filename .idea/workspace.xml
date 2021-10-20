@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db9c2308-af0b-4f1a-bba0-2c147922038d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/db.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +71,7 @@
       <option name="presentableId" value="Default" />
       <updated>1634711960756</updated>
       <workItem from="1634711962810" duration="19000" />
-      <workItem from="1634712011716" duration="2166000" />
+      <workItem from="1634712011716" duration="2321000" />
     </task>
     <servers />
   </component>
