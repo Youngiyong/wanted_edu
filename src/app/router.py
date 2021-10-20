@@ -1,20 +1,21 @@
 from fastapi import APIRouter,Depends, status, Header
 from sqlalchemy.orm import Session
 from db import get_db
-from schema import ResponseCreate, Response, PostBase, ResponsePostList
-
+from schema import ResponseCreate, Response, PostBase, ResponsePostList, RequestUser, UserBase
+from crud import create_user
 router = APIRouter()
 
 
-@router.post("/users", status_code=status.HTTP_201_CREATED, response_model=Response)
-def create_user(*, db: Session = Depends(get_db)):
+@router.post("/users", status_code=status.HTTP_201_CREATED, response_model=ResponseCreate)
+def post_user(*, db: Session = Depends(get_db), payload: RequestUser):
     """
     유저 생성 API
     """
+    return create_user(db=db, payload=payload)
 
 
 @router.post("/posts", status_code=status.HTTP_201_CREATED, response_model=ResponseCreate)
-def create(*, db: Session = Depends(get_db), authorization: str = Header(None)):
+def post(*, db: Session = Depends(get_db), authorization: str = Header(None)):
     """
     게시글 생성 API
     """
@@ -28,7 +29,7 @@ def delete(*, db: Session = Depends(get_db), authorization: str = Header(None)):
 
 
 @router.put("/posts/{id}", status_code=status.HTTP_200_OK, response_model=Response)
-def delete(*, db: Session = Depends(get_db), authorization: str = Header(None)):
+def put(*, db: Session = Depends(get_db), authorization: str = Header(None)):
     """
     게시글 수정 API
     """

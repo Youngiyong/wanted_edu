@@ -7,8 +7,8 @@ Base = declarative_base()
 
 
 class Users(Base):
-    id: Column(String(length=100), nullable=False)
-    email: Column(String(length=100), nullable=False)
+    id = Column(String(length=10), primary_key=True)
+    email = Column(String(length=100), nullable=False)
     __tablename__ = "users"
 
 
