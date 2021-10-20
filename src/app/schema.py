@@ -1,6 +1,25 @@
 from pydantic import BaseModel, Field
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, NewType
+from uuid import UUID
+
+UserID = NewType("UserID", UUID)
+
+
+class RequestUser(BaseModel):
+    email: str
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "email": "youn9354@naver.com",
+            }
+        }
+
+
+class UserBase(BaseModel):
+    id: UserID
+    email: str
 
 
 class PostBase(BaseModel):
@@ -8,6 +27,7 @@ class PostBase(BaseModel):
     title: str
     content: str
     author: str
+    user_id: UserID
     created_at: datetime
     updated_at: datetime
 
@@ -20,8 +40,26 @@ class Response(BaseModel):
         arbitrary_types_allowed = True
         schema_extra = {
             "example": {
-                "msg": "Success",
                 "code": "S000",
+                "msg": "Success",
+            }
+        }
+
+
+class ResponseCreate(BaseModel):
+    code: str
+    msg: str
+    data: dict
+
+    class Config:
+        arbitrary_types_allowed = True
+        schema_extra = {
+            "example": {
+                "code": "S000",
+                "msg": "Success",
+                "data": {
+                    "id": 1
+                }
             }
         }
 

@@ -1,9 +1,15 @@
 from datetime import datetime
-
+from typing import NewType
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
+
+
+class Users(Base):
+    id: Column(String(length=100), nullable=False)
+    email: Column(String(length=100), nullable=False)
+    __tablename__ = "users"
 
 
 class Posts(Base):
