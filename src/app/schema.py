@@ -27,7 +27,7 @@ class PostBase(BaseModel):
     title: str
     content: str
     author: str
-    user_id: UserID
+    is_writer: bool
     created_at: datetime
     updated_at: datetime
 
@@ -95,7 +95,7 @@ class ResponsePostList(BaseModel):
         }
 
 
-class RequestCreatePost(BaseModel):
+class RequestPost(BaseModel):
     title: str
     author: str
     content: Optional[str]
