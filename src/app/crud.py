@@ -38,7 +38,6 @@ def get_post(db: Session, post_id: str, user_id: str):
         "created_at": post.created_at,
         "updated_at": post.updated_at
     }
-    print(res)
     return res
 
 
@@ -57,7 +56,6 @@ def delete_post(db: Session, user_id: str, post_id: str):
 
 
 def create_post(db: Session, user_id: str, payload: RequestPost):
-    # 유저 체크
     user = db.query(Users).filter(Users.id==user_id).first()
 
     if user is None:
@@ -72,7 +70,6 @@ def create_post(db: Session, user_id: str, payload: RequestPost):
 
 
 def create_user(db: Session, payload: RequestUser):
-    # 유저 중복 체크
     user = db.query(Users).filter(Users.email==payload.email).first()
 
     if user:
@@ -82,3 +79,13 @@ def create_user(db: Session, payload: RequestUser):
     db.add(user)
     db.commit()
     return {"code": "S0000", "msg": "Success", "data": {"id": user.id}}
+
+
+def list_post(db: Session):
+    post = db.query(Posts).filter(Posts.deleted_at == None).all()
+
+    res = {
+        "count": "3",
+        "data": post
+    }
+    return res

@@ -2,7 +2,7 @@ from fastapi import APIRouter,Depends, status, Header
 from sqlalchemy.orm import Session
 from db import get_db
 from schema import ResponseCreate, Response, PostBase, ResponsePostList, RequestUser, RequestPost, RequestUpdatePost
-from crud import create_user, create_post, delete_post, put_post, get_post
+from crud import create_user, create_post, delete_post, put_post, get_post, list_post
 router = APIRouter()
 
 
@@ -38,11 +38,12 @@ def put(*, db: Session = Depends(get_db), user_id: str = Header(None), id: str, 
     return put_post(db=db, user_id=user_id, post_id=id, payload=payload)
 
 
-@router.get("/posts", status_code=status.HTTP_200_OK, response_model=PostBase)
-def get_list(*, db: Session = Depends(get_db), authorization: str = Header(None)):
+@router.get("/posts", status_code=status.HTTP_200_OK, response_model=ResponsePostList, response_model_exclude=["user_id", "deleted_at"])
+def get_list(*, db: Session = Depends(get_db)):
     """
     전체 게시글 API
     """
+    return list_post(db=db)
 
 
 @router.get("/posts/{id}", status_code=status.HTTP_200_OK, response_model=PostBase)

@@ -22,6 +22,26 @@ class UserBase(BaseModel):
     email: str
 
 
+class Post(BaseModel):
+    id: int
+    title: str
+    content: str
+    author: str
+    created_at: datetime
+
+    class Config:
+        arbitrary_types_allowed = True
+        schema_extra = {
+            "example": {
+                "id": 1,
+                "title": "제목",
+                "content": "내용",
+                "author": "윤기용",
+                "created_at": "2021-10-20 16:30:00"
+            }
+        }
+
+
 class PostBase(BaseModel):
     id: str
     title: str
@@ -66,14 +86,13 @@ class ResponseCreate(BaseModel):
 
 class ResponsePostList(BaseModel):
     count: int
-    data:  Optional[List[PostBase]]
+    data: List[Post] = []
 
     class Config:
-        arbitrary_types_allowed = True
         schema_extra = {
             "example": {
                 "count": 2,
-                "data":[
+                "data": [
                     {
                         "id" : 1,
                         "title": "게시글 제목",
